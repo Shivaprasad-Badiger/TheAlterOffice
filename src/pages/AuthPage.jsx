@@ -94,102 +94,78 @@ const AuthPage = () => {
 
   const BackgroundGrid = () => (
     <div className="absolute inset-0 overflow-hidden">
-      <div className="grid grid-cols-3 gap-1 auto-rows-min">
+      <div className="grid grid-cols-3 gap-1 h-full">
         {/* Column 1 */}
-        <div className="flex flex-col gap-1">
-          <div className="overflow-hidden">
+        <div className="flex flex-col gap-1 h-full">
+          <div className="overflow-hidden flex-1">
             <img
               src={backgroundImages[0]}
               alt=""
-              className="w-full h-auto object-cover"
+              className="w-full h-full object-cover"
             />
           </div>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden flex-1">
             <img
               src={backgroundImages[1]}
               alt=""
-              className="w-full h-auto object-cover"
+              className="w-full h-full object-cover"
             />
           </div>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden flex-1">
             <img
               src={backgroundImages[2]}
               alt=""
-              className="w-full h-auto object-cover"
-            />
-          </div>
-          {/* Additional images for larger screens */}
-          <div className="overflow-hidden hidden md:block">
-            <img
-              src={backgroundImages[0]}
-              alt=""
-              className="w-full h-auto object-cover"
+              className="w-full h-full object-cover"
             />
           </div>
         </div>
 
         {/* Column 2 */}
-        <div className="flex flex-col gap-1">
-          <div className="overflow-hidden -mt-[60px] md:-mt-[120px]">
+        <div className="flex flex-col gap-1 h-full -mt-12 md:-mt-20">
+          <div className="overflow-hidden flex-1">
             <img
               src={backgroundImages[3]}
               alt=""
-              className="w-full h-auto object-cover"
+              className="w-full h-full object-cover"
             />
           </div>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden flex-1">
             <img
               src={backgroundImages[4]}
               alt=""
-              className="w-full h-auto object-cover"
+              className="w-full h-full object-cover"
             />
           </div>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden flex-1">
             <img
               src={backgroundImages[5]}
               alt=""
-              className="w-full h-auto object-cover"
-            />
-          </div>
-          {/* Additional images for larger screens */}
-          <div className="overflow-hidden hidden md:block">
-            <img
-              src={backgroundImages[3]}
-              alt=""
-              className="w-full h-auto object-cover"
+              className="w-full h-full object-cover"
             />
           </div>
         </div>
 
         {/* Column 3 */}
-        <div className="flex flex-col gap-1">
-          <div className="overflow-hidden">
+        <div className="flex flex-col gap-1 h-full">
+          <div className="overflow-hidden flex-1">
             <img
               src={backgroundImages[6]}
               alt=""
-              className="w-full h-auto object-cover"
+              className="w-full h-full object-cover"
             />
           </div>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden flex-1">
             <img
               src={backgroundImages[7]}
               alt=""
-              className="w-full h-auto object-cover"
+              className="w-full h-full object-cover"
             />
           </div>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden flex-1">
             <img
               src={backgroundImages[8]}
               alt=""
-              className="w-full h-auto object-cover"
-            />
-          </div>
-          {/* Additional images for larger screens */}
-          <div className="overflow-hidden hidden md:block">
-            <img
-              src={backgroundImages[6]}
-              alt=""
-              className="w-full h-auto object-cover"
+              className="w-full h-full object-cover"
             />
           </div>
         </div>
@@ -199,14 +175,14 @@ const AuthPage = () => {
 
   if (showEmailForm) {
     return (
-      <div className="min-h-screen bg-white relative overflow-hidden">
+      <div className="h-screen bg-white relative overflow-hidden flex flex-col">
         <BackgroundGrid />
 
         {/* Form Container */}
-        <div className="relative z-10 w-full h-screen flex flex-col justify-end">
-          <div className="bg-white rounded-t-[63px] shadow-2xl border border-gray-100 max-h-[85vh] overflow-y-auto">
+        <div className="relative z-10 w-full h-full flex flex-col justify-end">
+          <div className="bg-white rounded-t-[63px] shadow-2xl border border-gray-100 flex-shrink-0">
             {/* Header */}
-            <div className="flex items-center justify-between p-6 pt-8">
+            <div className="flex items-center justify-between p-4 pt-6">
               <button
                 onClick={() => setShowEmailForm(false)}
                 className="text-gray-600 hover:text-gray-900 font-medium"
@@ -223,8 +199,8 @@ const AuthPage = () => {
             </div>
 
             {/* Form */}
-            <div className="px-8 py-6 pb-12">
-              <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="px-6 py-4 pb-8">
+              <form onSubmit={handleSubmit} className="space-y-3">
                 {!isLogin && (
                   <>
                     <div>
@@ -233,7 +209,7 @@ const AuthPage = () => {
                         name="fullName"
                         value={formData.fullName}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="Full Name"
                         required
                       />
@@ -245,7 +221,7 @@ const AuthPage = () => {
                         name="username"
                         value={formData.username}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="Username"
                         required
                       />
@@ -259,7 +235,7 @@ const AuthPage = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-4 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                    className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Email"
                     required
                   />
@@ -271,7 +247,7 @@ const AuthPage = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-4 pr-12 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                    className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     placeholder="Password"
                     required
                   />
@@ -287,7 +263,7 @@ const AuthPage = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-4 rounded-[26px] transition-colors flex items-center justify-center text-lg disabled:opacity-70 disabled:cursor-not-allowed shadow-lg"
+                  className="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 rounded-[26px] transition-colors flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed shadow-lg"
                 >
                   {loading ? (
                     <LoadingSpinner size="sm" />
@@ -300,10 +276,10 @@ const AuthPage = () => {
               </form>
 
               {/* Toggle */}
-              <div className="mt-8 text-center">
+              <div className="mt-4 text-center">
                 <button
                   onClick={() => setIsLogin(!isLogin)}
-                  className="text-blue-600 hover:text-blue-700 font-medium"
+                  className="text-blue-600 hover:text-blue-700 font-medium text-sm"
                 >
                   {isLogin
                     ? "Don't have an account? Sign up"
@@ -318,13 +294,13 @@ const AuthPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+    <div className="h-screen bg-white relative overflow-hidden flex flex-col">
       <BackgroundGrid />
 
       {/* White overlay gradient from bottom */}
-      <div className="relative z-10 w-full h-screen flex flex-col justify-end">
-        <div className="bg-white rounded-t-[63px] shadow-2xl border border-gray-100">
-          <div className="text-center p-10 w-full">
+      <div className="relative z-10 w-full h-full flex flex-col justify-end">
+        <div className="bg-white rounded-t-[63px] shadow-2xl border border-gray-100 flex-shrink-0">
+          <div className="text-center p-8 w-full">
             <h1 className="mb-3 flex items-center justify-center gap-1">
               <img src={logo} alt="Logo" className="w-[46px] h-[34px]" />
               <span
@@ -342,7 +318,7 @@ const AuthPage = () => {
             </p>
           </div>
 
-          <div className="w-full flex flex-col items-center space-y-4 mb-6 px-10">
+          <div className="w-full flex flex-col items-center space-y-4 mb-8 px-10">
             <button
               onClick={handleGoogleSignIn}
               disabled={googleLoading}
