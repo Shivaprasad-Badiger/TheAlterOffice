@@ -16,6 +16,7 @@ const ProfilePage = () => {
   const [showCreatePost, setShowCreatePost] = useState(false)
   const [showEditProfile, setShowEditProfile] = useState(false)
   const [uploading, setUploading] = useState(false)
+  const [loggingOut, setLoggingOut] = useState(false)
   const [editData, setEditData] = useState({
     full_name: '',
     bio: ''
@@ -82,9 +83,13 @@ const ProfilePage = () => {
   }
 
   const handleLogout = async () => {
+    setLoggingOut(true)
     const { error } = await signOut()
     if (!error) {
       navigate('/auth')
+    } else {
+      setLoggingOut(false)
+      console.error('Logout failed:', error)
     }
   }
 
@@ -273,10 +278,11 @@ const ProfilePage = () => {
           {isOwnProfile && (
             <button
               onClick={handleLogout}
-              className="flex items-center space-x-2 text-red-600 hover:text-red-700 font-medium transition-colors text-sm sm:text-base"
+              disabled={loggingOut}
+              className="flex items-center space-x-2 text-red-600 hover:text-red-700 font-medium transition-colors text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <LogOut size={18} className="sm:w-5 sm:h-5" />
-              <span>Logout</span>
+              <span>{loggingOut ? 'Logging out...' : 'Logout'}</span>
             </button>
           )}
         </div>
