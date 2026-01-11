@@ -175,32 +175,35 @@ const AuthPage = () => {
 
   if (showEmailForm) {
     return (
-      <div className="h-screen bg-white relative overflow-hidden flex flex-col">
+      <div className="h-screen bg-white relative flex flex-col">
         <BackgroundGrid />
 
+        {/* Spacer to push form to bottom */}
+        <div className="flex-1 min-h-0"></div>
+
         {/* Form Container */}
-        <div className="relative z-10 w-full h-full flex flex-col justify-end">
-          <div className="bg-white rounded-t-[63px] shadow-2xl border border-gray-100 flex-shrink-0">
+        <div className="relative z-10 w-full">
+          <div className="bg-white rounded-t-[63px] shadow-2xl border border-gray-100">
             {/* Header */}
-            <div className="flex items-center justify-between p-4 pt-6">
+            <div className="flex items-center justify-between px-4 py-4">
               <button
                 onClick={() => setShowEmailForm(false)}
-                className="text-gray-600 hover:text-gray-900 font-medium"
+                className="text-gray-600 hover:text-gray-900 font-medium text-sm"
               >
                 ← Back
               </button>
               <h2
-                className="text-xl font-semibold"
+                className="text-lg font-semibold"
                 style={{ fontFamily: "Karla" }}
               >
                 {isLogin ? "Sign In" : "Sign Up"}
               </h2>
-              <div className="w-16"></div>
+              <div className="w-12"></div>
             </div>
 
             {/* Form */}
-            <div className="px-6 py-4 pb-8">
-              <form onSubmit={handleSubmit} className="space-y-3">
+            <div className="px-6 pb-6">
+              <form onSubmit={handleSubmit} className="space-y-2.5">
                 {!isLogin && (
                   <>
                     <div>
@@ -209,7 +212,7 @@ const AuthPage = () => {
                         name="fullName"
                         value={formData.fullName}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2.5 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                         placeholder="Full Name"
                         required
                       />
@@ -221,7 +224,7 @@ const AuthPage = () => {
                         name="username"
                         value={formData.username}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-2.5 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                         placeholder="Username"
                         required
                       />
@@ -235,7 +238,7 @@ const AuthPage = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                     placeholder="Email"
                     required
                   />
@@ -247,7 +250,7 @@ const AuthPage = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 pr-12 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-2.5 pr-12 border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                     placeholder="Password"
                     required
                   />
@@ -256,14 +259,14 @@ const AuthPage = () => {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                   >
-                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 rounded-[26px] transition-colors flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed shadow-lg"
+                  className="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-2.5 rounded-[26px] transition-colors flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed shadow-lg text-sm"
                 >
                   {loading ? (
                     <LoadingSpinner size="sm" />
@@ -276,10 +279,10 @@ const AuthPage = () => {
               </form>
 
               {/* Toggle */}
-              <div className="mt-4 text-center">
+              <div className="mt-3 text-center pb-2">
                 <button
                   onClick={() => setIsLogin(!isLogin)}
-                  className="text-blue-600 hover:text-blue-700 font-medium text-sm"
+                  className="text-blue-600 hover:text-blue-700 font-medium text-xs"
                 >
                   {isLogin
                     ? "Don't have an account? Sign up"
@@ -294,14 +297,17 @@ const AuthPage = () => {
   }
 
   return (
-    <div className="h-screen bg-white relative overflow-hidden flex flex-col">
+    <div className="h-screen bg-white relative flex flex-col">
       <BackgroundGrid />
 
-      {/* White overlay gradient from bottom */}
-      <div className="relative z-10 w-full h-full flex flex-col justify-end">
-        <div className="bg-white rounded-t-[63px] shadow-2xl border border-gray-100 flex-shrink-0">
-          <div className="text-center p-8 w-full">
-            <h1 className="mb-3 flex items-center justify-center gap-1">
+      {/* Spacer to push content to bottom */}
+      <div className="flex-1 min-h-0"></div>
+
+      {/* Content Container */}
+      <div className="relative z-10 w-full">
+        <div className="bg-white rounded-t-[63px] shadow-2xl border border-gray-100">
+          <div className="text-center pt-8 pb-6 px-6 w-full">
+            <h1 className="mb-2 flex items-center justify-center gap-1">
               <img src={logo} alt="Logo" className="w-[46px] h-[34px]" />
               <span
                 className="text-[28px] font-semibold text-gray-900 leading-[100%]"
@@ -311,14 +317,14 @@ const AuthPage = () => {
               </span>
             </h1>
             <p
-              className="text-black text-[16px] font-normal"
+              className="text-black text-[15px] font-normal"
               style={{ fontFamily: "Kumbh Sans" }}
             >
               Moments That Matter, Shared Forever.
             </p>
           </div>
 
-          <div className="w-full flex flex-col items-center space-y-4 mb-8 px-10">
+          <div className="w-full flex flex-col items-center space-y-3 mb-6 px-10">
             <button
               onClick={handleGoogleSignIn}
               disabled={googleLoading}
