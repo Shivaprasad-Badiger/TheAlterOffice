@@ -24,20 +24,25 @@ function App() {
     initializedRef.current = true
 
     console.log('App: Initializing auth...')
-    initialize()
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         console.log('Auth state changed:', event, session?.user?.id)
         if (event === 'SIGNED_IN' && session?.user) {
+          useAuthStore.setState({ user: session.user, loading: false })
           await fetchProfile(session.user.id)
-          useAuthStore.setState({ user: session.user })
         } else if (event === 'SIGNED_OUT') {
-          useAuthStore.setState({ user: null, profile: null })
+          useAuthStore.setState({ user: null, profile: null, loading: false })
+        } else if (event === 'INITIAL_SESSION' && session?.user) {
+          useAuthStore.setState({ user: session.user, loading: false })
+          await fetchProfile(session.user.id)
         }
       }
     )
+
+    // Initialize after setting up listener
+    initialize()
 
     return () => {
       subscription.unsubscribe()
