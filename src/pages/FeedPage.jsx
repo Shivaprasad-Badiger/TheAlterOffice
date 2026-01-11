@@ -23,7 +23,13 @@ const FeedPage = () => {
   // Initial load
   useEffect(() => {
     if (initialLoad) {
-      fetchPosts(true).then(() => setInitialLoad(false))
+      fetchPosts(true)
+        .then(() => {
+          setInitialLoad(false)
+        })
+        .catch((error) => {
+          setInitialLoad(false) // Still set to false to prevent infinite loading
+        })
     }
   }, [fetchPosts, initialLoad])
 

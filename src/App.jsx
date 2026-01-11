@@ -12,44 +12,35 @@ import ProfilePage from './pages/ProfilePage'
 import Layout from './components/Layout'
 
 function App() {
-  const { user, loading, initialize, fetchProfile } = useAuthStore()
+  const { user, loading, initialize } = useAuthStore()
   const initializedRef = React.useRef(false)
 
   useEffect(() => {
     // Prevent double initialization in React StrictMode
     if (initializedRef.current) {
-      console.log('App: Already initialized, skipping...')
       return
     }
     initializedRef.current = true
 
-    console.log('App: Initializing auth...')
+    // Initialize auth
+    initialize()
 
-    // Listen for auth changes
+    // Listen for auth state changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        console.log('Auth state changed:', event, session?.user?.id)
         if (event === 'SIGNED_IN' && session?.user) {
           useAuthStore.setState({ user: session.user, loading: false })
-          await fetchProfile(session.user.id)
+          useAuthStore.getState().fetchProfile(session.user.id)
         } else if (event === 'SIGNED_OUT') {
           useAuthStore.setState({ user: null, profile: null, loading: false })
-        } else if (event === 'INITIAL_SESSION' && session?.user) {
-          useAuthStore.setState({ user: session.user, loading: false })
-          await fetchProfile(session.user.id)
         }
       }
     )
 
-    // Initialize after setting up listener
-    initialize()
-
     return () => {
       subscription.unsubscribe()
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
-  console.log('App render:', { user: user?.id, loading })
+  }, [initialize])
 
   if (loading) {
     return (

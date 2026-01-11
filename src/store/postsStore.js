@@ -1,19 +1,20 @@
 import { create } from 'zustand'
 import { supabase } from '../config/supabase'
+import useAuthStore from './authStore'
 
 const usePostsStore = create((set, get) => ({
   posts: [],
   loading: false,
   hasMore: true,
   lastPostId: null,
-  
+
   // Fetch posts with pagination
   fetchPosts: async (reset = false) => {
     try {
       set({ loading: true })
 
       const { lastPostId } = get()
-      const { data: { user } } = await supabase.auth.getUser()
+      const user = useAuthStore.getState().user
 
       let query = supabase
         .from('posts')
@@ -44,6 +45,11 @@ const usePostsStore = create((set, get) => ({
       const { data, error } = await query
 
       if (error) throw error
+
+      if (!data) {
+        set({ posts: [], loading: false, hasMore: false })
+        return { data: [], error: null }
+      }
 
       // Sort post images by order_index and add like information
       const postsWithSortedImages = (data || []).map(post => ({
